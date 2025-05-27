@@ -1,0 +1,14 @@
+{% extends "base/base.html" %}
+{% load static %}
+
+{% block content %}
+<h1>Мои сокурсники</h1>
+<div>
+  <img src="{% static 'images/student1.jpg' %}" alt="Сокурсник 1" width="100">
+  <p>ФИО: Смирнова Мария<br>Электронка: maria@example.com<br>Телефон: +7 911 111 11 11</p>
+</div>
+<div>
+  <img src="{% static 'images/student2.jpg' %}" alt="Сокурсник 2" width="100">
+  <p>ФИО: Кузнецов Дмитрий<br>Электронка: dmitriy@example.com<br>Телефон: +7 922 222 22 22</p>
+</div>
+{% endblock %}

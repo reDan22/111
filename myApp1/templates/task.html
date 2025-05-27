@@ -1,0 +1,13 @@
+{% extends "base/base.html" %}
+{% load static %}
+
+{% block content %}
+<form method="post" action="{% url 'myApp1:task'%}">
+    {% csrf_token %}
+    <p>Введите данные (пример: Вася: 300, 280, 210; Петя: 190, 173, 192; Алёна: 200, 200, 200):</p>
+    <p><input type="text" name="task_input" size="60"></p>
+    <input type="submit" value="Отправить">
+</form>
+
+<h2>ANSWER: {{ answer }}</h2>
+{% endblock content %}

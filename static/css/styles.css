@@ -1,0 +1,37 @@
+a{
+    text-decoration: none;
+}
+
+body{
+    background-color: rgb(29, 27, 27);
+    background-size: cover;
+    background-attachment: fixed;
+    color: white;
+    
+}
+.active{
+    background-color:yellow;
+}
+.img-items{
+    width: 300px;
+    height: 300px;
+}
+.text_black{
+   text-decoration: none;
+    color:black !important;
+}
+.builds-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* Автоподбор колонок */
+  gap: 16px;
+  padding: 16px;
+}
+
+.build-card {
+  height: 150px;
+  background: #f0f0f0;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

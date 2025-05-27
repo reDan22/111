@@ -1,0 +1,40 @@
+{% extends "base/base.html" %}
+{% load static %}
+
+{% block content %}
+<div style="display: flex; flex-direction: column; align-items: center; width: 100%;">
+  <h1>Я и моя образовательная программа</h1>
+  <h2>Наши сборки</h2>
+  
+  <ul style="
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    padding: 0;
+    list-style: none;
+    width: 100%;
+    max-width: 1200px; /* Ограничиваем максимальную ширину */
+  ">
+    {% for s in objects_array %}
+    <li style="
+      width: calc(25% - 20px); /* 4 колонки с учетом gap */
+      min-width: 250px; /* Минимальная ширина карточки */
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      padding: 15px;
+      box-sizing: border-box;
+    "> 
+      <h2 style="margin-top: 0;">{{ s.name }}</h2> 
+      <img src="{{ s.img }}" alt="" style="width: 100%; height: auto; border-radius: 4px;">
+      <div style="display: flex; flex-wrap: wrap; gap: 10px; margin-top: 10px;">
+        <p style="margin: 0;">{{ s.cpu }};</p>
+        <p style="margin: 0;">{{ s.gpu }};</p>
+        <p style="margin: 0;">{{ s.ram }}</p>
+        <p style="margin: 0; font-weight: bold;">{{ s.price }} ₽</p>
+      </div>
+    </li>
+    {% endfor %}
+  </ul>
+</div>
+{% endblock content %}

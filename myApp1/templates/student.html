@@ -1,0 +1,32 @@
+{% extends "base/base.html" %}
+{% load static %}
+
+{% block content %}
+<div style="display:flex; width:100%; justify-content:center; flex-direction:column; align-items:center;">
+   
+<h1>Я и моя образовательная программа</h1>
+
+<p>Я Фролов Даниил Сергеевич  </p>
+<img src="{% static 'img/me.jpg' %}" alt="" class="img-items">
+<p>dsfrolov_2@edu.hse.ru</p>
+<p>+79306770153</p>
+
+
+<h2>Бизнес Информатика</h2>
+<h3>Информатика и IT для бизнеса</h3>
+
+
+
+
+
+<h2>Мои сокурсники</h2>
+<ul>
+    {% for s in objects_array %}
+    
+
+        <li> <h1>{{ s.title }}</h1> <p>{{s.info}}</p> <img src="{% static s.img %}" alt="" class="img-items"> <p>{{s.all_info}}</p></li>
+    
+    {% endfor %}
+</ul>
+</div>
+{% endblock content %}

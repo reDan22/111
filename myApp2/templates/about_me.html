@@ -1,0 +1,11 @@
+{% extends "base/base.html" %}
+{% load static %}
+
+{% block content %}
+<h1>Я</h1>
+<img src="{% static 'images/me.jpg' %}" alt="Мое фото" width="150">
+<p><strong>ФИО:</strong> Иванов Иван Иванович</p>
+<p><strong>Электронная почта:</strong> ivanov@example.com</p>
+<p><strong>Телефон:</strong> +7 900 000 00 00</p>
+<p><strong>Резюме:</strong> Краткое описание опыта, навыков и целей обучения.</p>
+{% endblock %}

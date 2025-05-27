@@ -1,0 +1,20 @@
+{% extends "base/base.html" %}
+{% load static %}
+
+{% block content %}
+<h1>Менеджмент ОП</h1>
+<h2>Академический руководитель</h2>
+<img src="{% static 'images/director.jpg' %}" alt="Фото руководителя" width="150">
+<p><strong>ФИО:</strong> Петров Петр Петрович</p>
+<p><strong>Электронка:</strong> petrov@example.com</p>
+
+<h2>Менеджеры</h2>
+<div>
+  <img src="{% static 'images/manager1.jpg' %}" alt="Менеджер 1" width="100">
+  <p>Иванова Анна — anna@example.com</p>
+</div>
+<div>
+  <img src="{% static 'images/manager2.jpg' %}" alt="Менеджер 2" width="100">
+  <p>Сидоров Алексей — aleksey@example.com</p>
+</div>
+{% endblock %}
