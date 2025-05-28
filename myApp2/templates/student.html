@@ -2,42 +2,63 @@
 {% load static %}
 
 {% block content %}
-<div style="display:flex; width:100%; justify-content:center; flex-direction:column; align-items:center;">
-   
-<h1>Я и моя образовательная программа</h1>
+<div class="container py-5 text-white">
 
-<h3>{{MineInfo2.name}}</h3>
-<img src="{% static MineInfo2.img %}" alt="" class="img-items">
-<p>{{MineInfo2.email}}</p>
-<p>{{MineInfo2.number}}</p>
+  <h1 class="text-center mb-4">Я и моя образовательная программа</h1>
 
-<h1>Информация о программе:</h1>
-<h2>{{ProgramInfo2.title}}</h3>
-<h3>{{ProgramInfo2.description}}</h2>
+  <div class="card bg-dark text-white mb-5 p-4">
+    <h3 class="text-center">{{ MineInfo2.name }}</h3>
+    <div class="text-center my-3">
+      <img src="{% static MineInfo2.img %}" alt="Моё фото" class="img-fluid rounded" style="max-height: 300px;">
+    </div>
+    <p><strong>Email:</strong> {{ MineInfo2.email }}</p>
+    <p><strong>Телефон:</strong> {{ MineInfo2.number }}</p>
+  </div>
 
-<h1>Руководитель программы {{ProgramInfo2.head_name}}</h1>
-<img src="{% static ProgramInfo2.head_image %}" alt="" class="img-items">
-<h2>{{ProgramInfo2.head_email}}</h2>
+  <div class="card bg-dark text-white mb-5 p-4">
+    <h2 class="mb-3">Информация о программе</h2>
+    <h4 class="mb-2"><strong>Название:</strong> {{ ProgramInfo2.title }}</h4>
+    <p><strong>Описание:</strong> {{ ProgramInfo2.description }}</p>
+  </div>
 
+  <div class="row mb-5">
+    <div class="col-md-6">
+      <div class="card bg-dark text-white p-4 h-100">
+        <h3 class="mb-3">Руководитель программы: {{ ProgramInfo2.head_name }}</h3>
+        <img src="{% static ProgramInfo2.head_image %}" alt="Фото руководителя" class="img-fluid rounded mb-2">
+        <p><strong>Email:</strong> {{ ProgramInfo2.head_email }}</p>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="card bg-dark text-white p-4 h-100">
+        <h3 class="mb-3">Менеджер программы: {{ ProgramInfo2.manager_name }}</h3>
+        <img src="{% static ProgramInfo2.manager_image %}" alt="Фото менеджера" class="img-fluid rounded mb-2">
+        <p><strong>Email:</strong> {{ ProgramInfo2.manager_email }}</p>
+      </div>
+    </div>
+  </div>
 
-<h1>Менеджер программы {{ProgramInfo2.manager_name}}</h1>
-<img src="{% static ProgramInfo2.manager_image %}" alt="" class="img-items">
-<h2>{{ProgramInfo2.manager_email}}</h2>
+  <h2 class="mb-4">Мои сокурсники</h2>
+  <form method="get" class="mb-4 d-flex gap-2">
+    <input type="text" name="q" class="form-control" placeholder="Введите фамилию для поиска" value="{{ request.GET.q }}">
+    <button type="submit" class="btn btn-light">Поиск</button>
+  </form>
 
-
-<h2>Мои сокурсники</h2>
-<form method="get" class="mb-4">
-    <input type="text" name="q" class="form-control mb-2" placeholder="Введите фамилию для поиска" value="{{ request.GET.q }}">
-    <button type="submit" class="btn btn-primary">Поиск</button>
-</form>
-
-<ul>
+  <div class="row">
     {% for s in CourseMateInfo2 %}
-    
-
-        <li> <h1>{{ s.name }}</h1>  <img src="{{s.image_url}}" alt="" class="img-items"> <p>{{s.email}}</p><p>{{s.number}}</p> <p>{{s.program}}</p></li>
-    
+    <div class="col-md-4 mb-4">
+      <div class="card bg-secondary text-white p-3 h-100">
+        <h4>{{ s.name }}</h4>
+        <img src="{{ s.image_url }}" alt="{{ s.name }}" class="img-fluid rounded mb-2">
+        <p><strong>Email:</strong> {{ s.email }}</p>
+        <p><strong>Телефон:</strong> {{ s.number }}</p>
+        <p><strong>Программа:</strong> {{ s.program }}</p>
+      </div>
+    </div>
+    {% empty %}
+    <p>Сокурсники не найдены.</p>
     {% endfor %}
-</ul>
+  </div>
+
 </div>
 {% endblock content %}

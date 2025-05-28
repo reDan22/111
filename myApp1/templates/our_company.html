@@ -3,29 +3,29 @@
 
 {% block content %}
 <div class="container container-fluid">
-    <h1 class="text" id="top_of_page">Welcome to our company</h1>
+    <h1 class="text-light" id="top_of_page" style="font-size: 2.5rem; font-weight: bold;">Welcome to our company</h1>
 </div>
-<div class="container">
-    <nav class="page_navigation">
-        <ol class="">
-            <li><a href="#1" class="text_link"> Who is DFS?</a></li>
-            <li><a href="#2" class="text_link"> Why do they trust us</a></li>
-            <li><a href="#3" class="text_link"> Become the part of DFS!</a></li>
-        </ol>
-    </nav>  
-</div>
-<ul class="container text">
-    {% for s in objects_array %}
-    <li>
-        <h4 id="{{s.id}}">{{s.text}}</h4> 
-    </li>
-    <li>
-        <h4>{{s.text_2}}</h4>
-    </li>
-    <li>
-    
-        <h4><img src="{{ s.img }}" alt="" style="width: 100%; height: auto; border-radius: 4px;"></h4>
-    </li>
-    {% endfor %}
 
+<div class="container">
+    <nav class="page_navigation bg-dark">
+        <ol class="list-unstyled" style="padding-left: 0;">
+            <li><a href="#1" class="text-light text-decoration-none" style="font-size: 1.2rem;">Who is DFS?</a></li>
+            <li><a href="#2" class="text-light text-decoration-none" style="font-size: 1.2rem;">Why do they trust us?</a></li>
+            <li><a href="#3" class="text-light text-decoration-none" style="font-size: 1.2rem;">Become the part of DFS!</a></li>
+        </ol>
+    </nav>
+</div>
+
+<div class="container text-light">
+    {% for s in objects_array %}
+    <div class="mb-4">
+        <h4 id="{{s.id}}" style="font-size: 1.6rem; font-weight: bold; color: #e0e0e0;">{{ s.text }}</h4>
+
+        <div class="d-flex flex-wrap align-items-center {% if s.id|divisibleby:2 %}flex-row{% else %}flex-row-reverse{% endif %}">
+            <img src="{{ s.img }}" alt="" class="img-fluid rounded" style="max-width: 45%; height: auto; border-radius: 8px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3); margin: 10px;">
+            <p class="bg-dark" style="color: #b0b0b0; flex: 1; margin: 10px;">{{ s.text_2 }}</p>
+        </div>
+    </div>
+    {% endfor %}
+</div>
 {% endblock content %}

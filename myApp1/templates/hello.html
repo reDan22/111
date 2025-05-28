@@ -2,8 +2,9 @@
 {% load static %}
 
 {% block content %}
-<style>
-.bg-main{
-    background-image: url("{% static 'img/bg_image.png' %}");
-}</style> 
+<div class="text-white text-center d-flex flex-column justify-content-center align-items-center" style="height: 90vh; ">
+  <h1 class="display-3 fw-bold mb-4">DFS – BOOST YOUR FPS</h1>
+  <p class="lead mb-4">Подбери идеальный ПК для игр, учёбы и работы.</p>
+  <a href="{% url 'myApp1:buildings' %}" class="btn btn-primary btn-lg">Посмотреть сборки</a>
+</div>
 {% endblock content %}

@@ -1,15 +1,9 @@
 from django.db import models
 
-class ComputerBuild(models.Model):
-    name = models.CharField(max_length=255)
-    img = models.CharField(max_length=255)
-    cpu = models.CharField(max_length=255)
-    gpu = models.CharField(max_length=255)
-    ram = models.CharField(max_length=255)
-    price = models.IntegerField()
-    
-    def __str__(self):
-        return self.name
+# models.py
+
+
+
 class Component(models.Model):
     CATEGORY_CHOICES = [
         ('CPU', 'Процессор'),
@@ -25,6 +19,61 @@ class Component(models.Model):
 
     def __str__(self):
         return f"{self.get_category_display()}: {self.name}"
+    
+class ComputerBuild(models.Model):
+    name = models.CharField(max_length=255)
+    img = models.CharField(max_length=255)
+
+    cpu = models.ForeignKey(
+        Component,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        limit_choices_to={'category': 'CPU'},
+        related_name='build_cpu'
+    )
+    gpu = models.ForeignKey(
+        Component,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        limit_choices_to={'category': 'GPU'},
+        related_name='build_gpu'
+    )
+    ram = models.ForeignKey(
+        Component,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        limit_choices_to={'category': 'RAM'},
+        related_name='build_ram'
+    )
+    ssd = models.ForeignKey(
+        Component,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        limit_choices_to={'category': 'SSD'},
+        related_name='build_ssd'
+    )
+
+    price = models.IntegerField()
+
+    def save(self, *args, **kwargs):
+        self.price = self.calculate_price()
+        super().save(*args, **kwargs)
+
+
+    def __str__(self):
+        return self.name
+
+    def calculate_price(self):
+        total = 0
+        for part in [self.cpu, self.gpu, self.ram, self.ssd]:
+            if part:
+                total += part.price
+        return total
+
 
 class PCConfiguration(models.Model):
     customer_name = models.CharField(max_length=100)

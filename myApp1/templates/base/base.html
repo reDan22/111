@@ -18,9 +18,9 @@
       <ul class="text_black d-flex text-black text_black">
         <li class="text-black list-group-item {% if request.resolver_match.url_name == 'hello' %}bg-secondary{% else %}bg-light{% endif %} text-black"><a href="{% url 'myApp1:hello'%}" class="m-3 w-40 h-40"><img src="{% static 'img/logo_dfs.png' %}" alt="Logo"></a></li>
         <li class="text_black list-group-item {% if request.resolver_match.url_name == 'our_company' %}bg-secondary{% else %}bg-light{% endif %} text-black"><a href="{% url 'myApp1:our_company'%}" class="m-3 text_black">О нас</a></li>
-        <li class="text_black list-group-item {% if request.resolver_match.url_name == 'pc_configurator' %}bg-secondary{% else %}bg-light{% endif %} text-black"><a href="{% url 'myApp1:pc_configurator'%}" class="m-3 text_black">Задание</a></li>
-        <li class="text_black list-group-item {% if request.resolver_match.url_name == 'buildings' %}bg-secondary{% else %}bg-light{% endif %} text-black"><a href="{% url 'myApp1:buildings'%}" class="m-3 text_black">Сборки</a></li>
-        <li class="text_black list-group-item {% if request.resolver_match.url_name == 'orders' %}bg-secondary{% else %}bg-light{% endif %} text-black"><a href="{% url 'myApp1:orders'%}" class="m-3 text_black">Сборки</a></li>
+                <li class="text_black list-group-item {% if request.resolver_match.url_name == 'buildings' %}bg-secondary{% else %}bg-light{% endif %} text-black"><a href="{% url 'myApp1:buildings'%}" class="m-3 text_black">Сборки</a></li>
+        <li class="text_black list-group-item {% if request.resolver_match.url_name == 'pc_configurator' %}bg-secondary{% else %}bg-light{% endif %} text-black"><a href="{% url 'myApp1:pc_configurator'%}" class="m-3 text_black">Конфигуратор</a></li>
+        <li class="text_black list-group-item {% if request.resolver_match.url_name == 'orders' %}bg-secondary{% else %}bg-light{% endif %} text-black"><a href="{% url 'myApp1:orders'%}" class="m-3 text_black">Заказы</a></li>
         <li class="text_black list-group-item bg-light text-black"><a href="https://www.dns-shop.ru/" class="m-3 text_black" target="_blank">Наши партнёры</a></li>
         <li class="text_black list-group-item {% if request.resolver_match.url_name == 'student' %}bg-secondary{% else %}bg-light{% endif %} text-black"><a href="{% url 'myApp2:student'%}" class="m-3 text_black">Студент</a></li>
         

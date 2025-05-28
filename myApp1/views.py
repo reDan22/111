@@ -93,17 +93,58 @@ def pc_configurator(request):
         form = PCConfigForm(request.POST)
         if form.is_valid():
             order = form.save()
-            # Сохраняем данные в контекст вместо редиректа
+
+            # Сохраняем данные в сессии для дальнейшего использования (например, для конфигурации в заказе)
+            request.session['cpu'] = form.cleaned_data['cpu'].id
+            request.session['gpu'] = form.cleaned_data['gpu'].id
+            request.session['ram'] = form.cleaned_data['ram'].id
+            request.session['ssd'] = form.cleaned_data['ssd'].id
+
             context = {
                 'form': form,
                 'success_message': f'Заказ #{order.id} создан! Сумма: {order.total_price} руб.',
-                'last_order': order  # Передаем созданный заказ
+                'last_order': order
             }
             return render(request, 'pc_configurator.html', context)
     else:
-        form = PCConfigForm()
-    
+        initial_data = {}
+
+        # Извлекаем только если форма еще не была отправлена (через сессию или URL параметры)
+        if not request.session.get('form_submitted', False):  # Проверка, что форма еще не отправлялась
+            cpu_id = request.session.get('cpu')
+            gpu_id = request.session.get('gpu')
+            ram_id = request.session.get('ram')
+            ssd_id = request.session.get('ssd')
+
+            # Если данные в сессии есть, инициализируем их в форму
+            if cpu_id:
+                initial_data['cpu'] = Component.objects.get(id=cpu_id, category='CPU')
+            if gpu_id:
+                initial_data['gpu'] = Component.objects.get(id=gpu_id, category='GPU')
+            if ram_id:
+                initial_data['ram'] = Component.objects.get(id=ram_id, category='RAM')
+            if ssd_id:
+                initial_data['ssd'] = Component.objects.get(id=ssd_id, category='SSD')
+
+            # Если данных в GET-запросе нет, будем искать по URL-параметрам
+            try:
+                if 'cpu' in request.GET:
+                    initial_data['cpu'] = Component.objects.get(id=request.GET['cpu'], category='CPU')
+                if 'gpu' in request.GET:
+                    initial_data['gpu'] = Component.objects.get(id=request.GET['gpu'], category='GPU')
+                if 'ram' in request.GET:
+                    initial_data['ram'] = Component.objects.get(id=request.GET['ram'], category='RAM')
+                if 'ssd' in request.GET:
+                    initial_data['ssd'] = Component.objects.get(id=request.GET['ssd'], category='SSD')
+            except Component.DoesNotExist:
+                pass  # Если компонент не найден — игнорируем
+
+        form = PCConfigForm(initial=initial_data)
+
     return render(request, 'pc_configurator.html', {'form': form})
+
+
+
 
 
 #Решение задачи тут
