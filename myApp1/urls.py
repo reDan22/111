@@ -17,12 +17,14 @@ Including another URLconf
 #from django.contrib import admin
 from django.urls import path
 from . import views
-app_name = "myApp1" 
+app_name = "myApp1"
+ 
 urlpatterns = [
     path('hello/', views.hello, name='hello'),
     path("show_data/", views.show_data),
     path("our_company/", views.our_company, name="our_company"),
     path("task/", views.task, name="task"),
     path("buildings/", views.buildings, name="buildings"),
-    
+    path('pc-configurator/', views.pc_configurator, name='pc_configurator'),
+    path('orders/', views.orders, name='orders'),
 ]

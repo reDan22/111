@@ -1,0 +1,43 @@
+{% extends "base/base.html" %}
+{% load static %}
+
+{% block content %}
+<div style="display:flex; width:100%; justify-content:center; flex-direction:column; align-items:center;">
+   
+<h1>Я и моя образовательная программа</h1>
+
+<h3>{{MineInfo2.name}}</h3>
+<img src="{% static MineInfo2.img %}" alt="" class="img-items">
+<p>{{MineInfo2.email}}</p>
+<p>{{MineInfo2.number}}</p>
+
+<h1>Информация о программе:</h1>
+<h2>{{ProgramInfo2.title}}</h3>
+<h3>{{ProgramInfo2.description}}</h2>
+
+<h1>Руководитель программы {{ProgramInfo2.head_name}}</h1>
+<img src="{% static ProgramInfo2.head_image %}" alt="" class="img-items">
+<h2>{{ProgramInfo2.head_email}}</h2>
+
+
+<h1>Менеджер программы {{ProgramInfo2.manager_name}}</h1>
+<img src="{% static ProgramInfo2.manager_image %}" alt="" class="img-items">
+<h2>{{ProgramInfo2.manager_email}}</h2>
+
+
+<h2>Мои сокурсники</h2>
+<form method="get" class="mb-4">
+    <input type="text" name="q" class="form-control mb-2" placeholder="Введите фамилию для поиска" value="{{ request.GET.q }}">
+    <button type="submit" class="btn btn-primary">Поиск</button>
+</form>
+
+<ul>
+    {% for s in CourseMateInfo2 %}
+    
+
+        <li> <h1>{{ s.name }}</h1>  <img src="{{s.image_url}}" alt="" class="img-items"> <p>{{s.email}}</p><p>{{s.number}}</p> <p>{{s.program}}</p></li>
+    
+    {% endfor %}
+</ul>
+</div>
+{% endblock content %}

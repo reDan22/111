@@ -1,0 +1,83 @@
+{% extends "base/base.html" %}
+{% load static %}
+
+{% block content %}
+<div style="max-width: 1200px; margin: 0 auto; padding: 20px;">
+  <h1 style="text-align: center; margin-bottom: 30px;">История заказов</h1>
+
+  <!-- Фильтр по месяцам -->
+  <div style="margin-bottom: 30px; background: gray; padding: 20px; border-radius: 8px;">
+    <form method="post" style="display: flex; align-items: center; gap: 15px;">
+      {% csrf_token %}
+      <label for="month" style="font-weight: bold;">Фильтр по месяцу:</label>
+      <select name="month" id="month" style="padding: 8px; border-radius: 4px;">
+        <option value="">Все месяцы</option>
+        {% for month in available_months %}
+          <option value="{{ month|date:'Y-m' }}" {% if selected_month == month|date:'Y-m' %}selected{% endif %}>
+            {{ month|date:"F Y" }}
+          </option>
+        {% endfor %}
+      </select>
+      <button type="submit" style="padding: 8px 15px; background: #4CAF50; color: gray; border: none; border-radius: 4px;">
+        Применить
+      </button>
+    </form>
+  </div>
+
+  <!-- Статистика -->
+  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; margin-bottom: 30px;">
+    <!-- Общая статистика -->
+    <div style="background: gray; padding: 15px; border-radius: 8px;">
+      <h3 style="margin-top: 0; color: #2e7d32;">Общая статистика</h3>
+      <p>Всего заказов: <strong>{{ all_orders_stats.total_orders }}</strong></p>
+      <p>Общая сумма: <strong>{{ all_orders_stats.total_revenue|default:"0" }} ₽</strong></p>
+      <p>Средний чек: <strong>{{ all_orders_stats.avg_order|default:"0"|floatformat:2 }} ₽</strong></p>
+    </div>
+
+    <!-- Статистика по выбранному периоду -->
+    <div style="background: gray; padding: 15px; border-radius: 8px;">
+      <h3 style="margin-top: 0; color: #3949ab;">
+        {% if formatted_selected_month %}
+          Статистика за {{ formatted_selected_month }}
+        {% else %}
+          Статистика за все месяцы
+        {% endif %}
+      </h3>
+      <p>Заказов: <strong>{{ filtered_stats.total_orders }}</strong></p>
+      <p>Сумма: <strong>{{ filtered_stats.total_revenue|default:"0" }} ₽</strong></p>
+      <p>Средний чек: <strong>{{ filtered_stats.avg_order|default:"0"|floatformat:2 }} ₽</strong></p>
+    </div>
+  </div>
+
+  <!-- Таблица заказов -->
+  <table style="
+    width: 100%;
+    border-collapse: collapse;
+    font-family: Arial, sans-serif;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  ">
+    <thead style="background-color: gray">
+      <tr>
+        <th style="padding: 10px; border: 1px solid gray;">ID</th>
+        <th style="padding: 10px; border: 1px solid gray;">Дата создания</th>
+        <th style="padding: 10px; border: 1px solid gray;">Сумма</th>
+        <th style="padding: 10px; border: 1px solid gray;">Клиент</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for order in objects_array %}
+        <tr>
+          <td style="padding: 10px; border: 1px solid gray;">{{ order.id }}</td>
+          <td style="padding: 10px; border: 1px solid gray;">{{ order.created_at|date:"d.m.Y H:i" }}</td>
+          <td style="padding: 10px; border: 1px solid gray;">{{ order.total_price }} ₽</td>
+          <td style="padding: 10px; border: 1px solid gray;">{{ order.customer_name }}</td>
+        </tr>
+      {% empty %}
+        <tr>
+          <td colspan="4" style="padding: 15px; text-align: center; border: 1px solid gray;">Нет заказов за выбранный период.</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock content %}

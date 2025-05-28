@@ -1,7 +1,8 @@
 from django.shortcuts import render
 from django.shortcuts import render, redirect
 from django.db.models import Count
-from .models import StudentInfo2
+from .models import  MineInfo2, ProgramInfo2, CourseMateInfo2
+from django.db.models import Q  # нужно для фильтрации
 
 def about_me(request):
     return render(request, 'about_me.html')
@@ -14,10 +15,28 @@ def management(request):
 
 def groupmates(request):
     return render(request, 'groupmates.html')
+
+
+
+
+
+
 def student(request):
-    objects_array2 = StudentInfo2.objects.all()
-    context = {"objects_array": objects_array2}
+    search_query = request.GET.get('q', '').strip()
+    coursmates = CourseMateInfo2.objects.all()
+
+    if search_query:
+        coursmates = coursmates.filter(name__contains=search_query)
+
+    context = {
+        "MineInfo2": MineInfo2.objects.first(),
+        "ProgramInfo2": ProgramInfo2.objects.first(),
+        "CourseMateInfo2": coursmates
+    }
     return render(request, "student.html", context)
+
+
+
 
 
 

@@ -1,3 +1,8 @@
 from django.contrib import admin
 
-# Register your models here.
+from .models import ComputerBuild, PCConfiguration, Component, WhoIsDFS
+
+admin.site.register(ComputerBuild)
+admin.site.register(PCConfiguration)
+admin.site.register(Component)
+admin.site.register(WhoIsDFS)

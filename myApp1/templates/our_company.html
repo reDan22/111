@@ -8,27 +8,24 @@
 <div class="container">
     <nav class="page_navigation">
         <ol class="">
-            <li><a href="#who_dfs" class="text_link"> Who is DFS?</a></li>
-            <li><a href="#trust" class="text_link"> Why do they trust us</a></li>
-            <li><a href="#thanks" class="text_link"> Become the part of DFS!</a></li>
+            <li><a href="#1" class="text_link"> Who is DFS?</a></li>
+            <li><a href="#2" class="text_link"> Why do they trust us</a></li>
+            <li><a href="#3" class="text_link"> Become the part of DFS!</a></li>
         </ol>
-    </nav>
+    </nav>  
 </div>
 <ul class="container text">
-<li id="who_dfs">  <p>Welcome to our company, the leading provider of high-quality laptops for all your computing needs. With a wide range of options to choose from, we offer the latest technology and top brands to ensure you find the perfect laptop for your personal or professional use.</p></li>
-<li class="img_about_us"><p><img class="img-fluid" src="https://gazeta-rybinsk.ru/wp-content/uploads/2022/04/gazeta_rybinskru_Kakoj_noutbuk_vzyat_dlya_igr_laptop-5673901_1920.jpg" alt="laptop" title="Example laptop"></li></p>
-<li> <p>At our company, we understand the importance of having a reliable and efficient laptop, which is why we carefully select each product to meet the highest standards of performance and durability. Whether you are a student, a professional, or a gaming enthusiast, we have the right laptop for you.</p></li>
-<li id="trust"> <p>Our team of experts is dedicated to providing exceptional customer service and expert advice to help you make the best decision for your computing needs. We are committed to ensuring that you have a seamless shopping experience and that you are completely satisfied with your purchase.</p></li>
-<li class="img_about_us"><p><img class="img-fluid" src="https://aws.softline.com/media/cache/fb/78/fb78b84ac160a013f95de9bb219bd5ca.webp" alt="" title="Our team"></li></p>
-<li><p>In addition to our wide selection of laptops, we also offer a range of accessories and peripherals to enhance your computing experience. From carrying cases to wireless mice, we have everything you need to make the most of your new laptop.</p></li>
-<li> <p>We take pride in being the go-to destination for all your laptop needs, and we are constantly updating our inventory to offer the latest and greatest products on the market. Whether you are in need of a powerful workhorse for your business or a sleek and portable laptop for on-the-go use, we have you covered.</p>	</li>
-<li id="thanks"><p>Thank you for choosing our company for all your laptop needs. We look forward to serving you and providing you with the best products and customer service in the industry.</p>
-</li>
-<ul>
-    <li>Duty</li>
-    <li>Fancy</li>
-    <li>Cervice</li>
-</ul>
-<li> <a href="#top_of_page">Вернуться наверх</a></li>
-</ul>
+    {% for s in objects_array %}
+    <li>
+        <h4 id="{{s.id}}">{{s.text}}</h4> 
+    </li>
+    <li>
+        <h4>{{s.text_2}}</h4>
+    </li>
+    <li>
+    
+        <h4><img src="{{ s.img }}" alt="" style="width: 100%; height: auto; border-radius: 4px;"></h4>
+    </li>
+    {% endfor %}
+
 {% endblock content %}
